@@ -10,12 +10,8 @@ int countPairs1(int *arr, int len, int value) {
             if (j > i + 1 && arr[j] == arr[j - 1]) {
                 continue;
             }
-            int sum = arr[i] + arr[j];
-            if (sum == value) {
+            if (arr[i] + arr[j] == value) {
                 ++count;
-                break;
-            } else if (sum > value) {
-                break;
             }
         }
     }
@@ -31,12 +27,14 @@ int countPairs2(int *arr, int len, int value) {
         int sum = arr[i] + arr[j];
         if (sum == value) {
             ++count;
-
-            // Пропускаем повторяющиеся значения
-            int leftVal = arr[i];
-            int rightVal = arr[j];
-            while (i < j && arr[i] == leftVal) ++i;
-            while (i < j && arr[j] == rightVal) --j;
+            int left = arr[i];
+            int right = arr[j];
+            while (i < j && arr[i] == left) {
+                ++i;
+            }
+            while (i < j && arr[j] == right) {
+                --j;
+            }
         } else if (sum < value) {
             ++i;
         } else {
@@ -53,17 +51,17 @@ int countPairs3(int *arr, int len, int value) {
             continue;
         }
         int target = value - arr[i];
-        int left = i + 1;
-        int right = len - 1;
-        while (left <= right) {
-            int mid = (left + right) / 2;
-            if (arr[mid] == target) {
+        int l = i + 1;
+        int r = len - 1;
+        while (l <= r) {
+            int m = (l + r) / 2;
+            if (arr[m] == target) {
                 ++count;
                 break;
-            } else if (arr[mid] < target) {
-                left = mid + 1;
+            } else if (arr[m] < target) {
+                l = m + 1;
             } else {
-                right = mid - 1;
+                r = m - 1;
             }
         }
     }
