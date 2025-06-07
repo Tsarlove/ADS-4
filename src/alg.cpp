@@ -10,7 +10,8 @@ int countPairs1(int *arr, int len, int value) {
             if (sum == value) {
                 ++count;
                 break;  // только одна уникальная пара с arr[i]
-            } else if (sum > value) break;
+            } else if (sum > value) {
+                break;
         }
     }
     return count;
@@ -41,5 +42,38 @@ int countPairs2(int *arr, int len, int value) {
             --right;
         }
     }
+    return count;
+}
+
+int binarySearch(int* arr, int left, int right, int target) {
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == target) {
+            return mid;
+        } else if (arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+
+int countPairs3(int* arr, int len, int value) {
+    int count = 0;
+
+    for (int i = 0; i < len - 1; ++i) {
+        // Пропуск дубликатов
+        if (i > 0 && arr[i] == arr[i - 1])
+            continue;
+
+        int target = value - arr[i];
+        int j = binarySearch(arr, i + 1, len - 1, target);
+
+        if (j != -1) {
+            ++count;
+        }
+    }
+
     return count;
 }
