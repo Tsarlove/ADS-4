@@ -24,25 +24,23 @@ int countPairs1(int *arr, int len, int value) {
 
 int countPairs2(int *arr, int len, int value) {
     int count = 0;
-    int left = 0;
-    int right = len - 1;
+    int i = 0;
+    int j = len - 1;
 
-    while (left < right) {
-        int sum = arr[left] + arr[right];
+    while (i < j) {
+        int sum = arr[i] + arr[j];
         if (sum == value) {
             ++count;
-            int lval = arr[left];
-            int rval = arr[right];
-            while (left < right && arr[left] == lval) {
-                ++left;
-            }
-            while (left < right && arr[right] == rval) {
-                --right;
-            }
+
+            // Пропускаем повторяющиеся значения
+            int leftVal = arr[i];
+            int rightVal = arr[j];
+            while (i < j && arr[i] == leftVal) ++i;
+            while (i < j && arr[j] == rightVal) --j;
         } else if (sum < value) {
-            ++left;
+            ++i;
         } else {
-            --right;
+            --j;
         }
     }
     return count;
