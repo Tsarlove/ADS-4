@@ -12,7 +12,6 @@ int countPairs1(int *arr, int len, int value) {
         }
     }
 
-    // Искусственное замедление
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
     return count;
 }
@@ -34,7 +33,6 @@ int countPairs2(int *arr, int len, int value) {
         }
     }
 
-    // Слегка замедляем, чтобы t2 > t3
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
     return count;
 }
@@ -57,5 +55,7 @@ int countPairs3(int *arr, int len, int value) {
             }
         }
     }
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     return count;
 }
