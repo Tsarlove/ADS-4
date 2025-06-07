@@ -1,23 +1,28 @@
 // Copyright 2021 NNTU-CS
 #include <chrono>
 #include <thread>
+#include <unordered_set>
+#include <algorithm>
 
-int countPairs1(int *arr, int len, int value) {
+int countPairs1(int* arr, int len, int value) {
     int count = 0;
+    std::sort(arr, arr + len);
     for (int i = 0; i < len - 1; ++i) {
         if (i > 0 && arr[i] == arr[i - 1]) continue;
         for (int j = i + 1; j < len; ++j) {
             if (j > i + 1 && arr[j] == arr[j - 1]) continue;
-            if (arr[i] + arr[j] == value) ++count;
+            if (arr[i] + arr[j] == value) {
+                ++count;
+            }
         }
     }
-
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
     return count;
 }
 
-int countPairs2(int *arr, int len, int value) {
+int countPairs2(int* arr, int len, int value) {
     int count = 0;
+    std::sort(arr, arr + len);
     int i = 0, j = len - 1;
     while (i < j) {
         int sum = arr[i] + arr[j];
@@ -32,13 +37,13 @@ int countPairs2(int *arr, int len, int value) {
             --j;
         }
     }
-
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
     return count;
 }
 
-int countPairs3(int *arr, int len, int value) {
+int countPairs3(int* arr, int len, int value) {
     int count = 0;
+    std::sort(arr, arr + len);
     for (int i = 0; i < len - 1; ++i) {
         if (i > 0 && arr[i] == arr[i - 1]) continue;
         int target = value - arr[i];
@@ -55,7 +60,6 @@ int countPairs3(int *arr, int len, int value) {
             }
         }
     }
-
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
     return count;
 }
