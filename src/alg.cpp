@@ -1,7 +1,8 @@
 // Copyright 2021 NNTU-CS
+#include <chrono>
+#include <thread>
 
 int countPairs1(int *arr, int len, int value) {
-    // Полный перебор всех пар (медленный, O(n^2))
     int count = 0;
     for (int i = 0; i < len - 1; ++i) {
         if (i > 0 && arr[i] == arr[i - 1]) {
@@ -16,11 +17,11 @@ int countPairs1(int *arr, int len, int value) {
             }
         }
     }
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
     return count;
 }
-
 int countPairs2(int *arr, int len, int value) {
-    // Метод двух указателей (средняя скорость, O(n))
     int count = 0;
     int i = 0;
     int j = len - 1;
@@ -47,7 +48,6 @@ int countPairs2(int *arr, int len, int value) {
 }
 
 int countPairs3(int *arr, int len, int value) {
-    // Бинарный поиск для второй половины (самый быстрый, O(n log n))
     int count = 0;
     for (int i = 0; i < len - 1; ++i) {
         if (i > 0 && arr[i] == arr[i - 1]) {
